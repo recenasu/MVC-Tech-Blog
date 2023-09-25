@@ -22,6 +22,9 @@ const sequelize = require('./config/connection');
 // Import the SequelizeStore class for storing session data in the database
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+// Import the 'dotenv' module config() function for environment variable security. Used in the 'sess' config variable.
+require('dotenv').config();
+
 // Assign the express() function to a variable for easy reference
 const app = express();
 
