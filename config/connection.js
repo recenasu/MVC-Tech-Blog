@@ -6,7 +6,7 @@ require('dotenv').config();
 
 let sequelize;
 
-// Connect to the appropriate database, remote (JAWSDB_URL) or local
+// Create an instance of the Sequelize class for connecting to the appropriate database, remote (JAWSDB_URL) or local
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
