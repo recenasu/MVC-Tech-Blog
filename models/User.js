@@ -1,8 +1,7 @@
 // Import the Model and Datatypes objects from the sequelize module
-const { Model, Datatypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 // Import the bcrypt module for password hash and comparison
 const bcrypt = require('bcrypt');
-const sequelize = require('../config/connection');
 // Import the 'sequlize' object for creating a model and connecting to the database.
 const sequelize = require('../config/connection');
 
@@ -16,7 +15,7 @@ class User extends Model {
 User.init(
     {
         id: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
@@ -26,7 +25,7 @@ User.init(
             allowNull: false,
         },
         email: {
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
@@ -34,7 +33,7 @@ User.init(
             },
         },
         password: {
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [8],

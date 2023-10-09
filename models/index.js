@@ -13,7 +13,7 @@ Comment.belongsTo(Blogpost, {
     foreignKey: 'blog_id',
 });
 
-User.hasMany(Blogpost. {
+User.hasMany(Blogpost, {
     foreignKey: 'user_id',
 });
 
