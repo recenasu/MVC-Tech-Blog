@@ -34,24 +34,24 @@ const PORT = process.env.PORT || 3001;
 // Create a new instance of the Handlebars.js engine with helpers functions
 const hbs = exphbs.create({ helpers });
 
-// Create configuration object for the 'session' middleware
-const sess = {
-    secret: process.env.SESS_SECRET,
-    cookie: {
-        maxAge: 300000,
-        httpOnly: true,
-        secure: false,
-        sameSite: 'strict',
-    },
-    resave: false,
-    saveUnitialized: true,
-    store: new SequelizeStore({
-        db: sequelize
-    })
-};
+// // Create configuration object for the 'session' middleware
+// const sess = {
+//     secret: process.env.SESS_SECRET,
+//     cookie: {
+//         maxAge: 300000,
+//         httpOnly: true,
+//         secure: false,
+//         sameSite: 'strict',
+//     },
+//     resave: false,
+//     saveUnitialized: true,
+//     store: new SequelizeStore({
+//         db: sequelize
+//     })
+// };
 
-// Make the 'session' object available for use, configured with 'sess' parameters
-app.use(session(sess));
+// // Make the 'session' object available for use, configured with 'sess' parameters
+// app.use(session(sess));
 
 // Register the template engine for Express.js. Associate the file extension 'handlebars' with the Handlebars template engine (hbs.engine)
 app.engine('handlebars', hbs.engine);
