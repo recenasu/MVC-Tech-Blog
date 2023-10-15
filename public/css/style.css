@@ -1,8 +1,8 @@
 :root {
-  --primary: #3d5852;
-  --secondary: #86938f;
-  --tertiary: #5e877f;
-  --quatrinary: #6c6b67;
+  --primary: #7e8dd8;
+  --secondary: #55565d;
+  --tertiary: #2c3b7d;
+  --quatrinary: #2b3467;
   --light: #e3e4e3;
   --dark: #182c23;
   --error: rgb(228, 46, 1);
@@ -21,6 +21,10 @@ body {
 
 a {
   color: var(--dark);
+  text-decoration: none;
+}
+
+a:hover {
   text-decoration: none;
 }
 
@@ -66,15 +70,44 @@ nav a:hover {
   background-color: var(--dark);
 }
 
-.gallery {
-  flex: 4;
-  background-color: #fff;
-  padding: 50px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
+#blogpost-container {
+display: flex;
+flex-wrap: nowrap;
+flex-direction: column;
+width: 100%;
+padding: 10px;
 }
+
+.blogpost-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: blue;
+  color: azure;
+  border: none;
+  margin: 0 0 10px 0;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+ .blogpost-button:hover {
+  color: var(--secondary);
+  background-color: var(--light);
+}
+
+.small-font {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.large-font {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
 
 .btn-no-style {
   background: none;
@@ -90,19 +123,6 @@ nav a:hover {
 img {
   max-width: 100%;
   height: auto;
-}
-
-.painting {
-  width: 50%;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 25px;
-}
-
-.painting-details {
-  text-align: center;
-  padding: 10px 20px;
-  font-weight: bold;
 }
 
 /* CARDS */
@@ -142,17 +162,6 @@ img {
   font-size: 1.4rem;
   text-align: center;
   font-weight: bold;
-}
-
-.gallery-name {
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 5px var(--secondary);
-  border: 10px groove var(--light);
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-right: 100px;
-  padding-left: 100px;
 }
 
 /* LAYOUT */
