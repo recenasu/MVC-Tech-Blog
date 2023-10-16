@@ -1,0 +1,16 @@
+{{!-- User interaction with an individual blogpost --}}
+<section id="blogpost-container">
+    <div class="blogpost-display">
+        <p class="large-font"><span>{{{blogpost.emoji}}}</span>   {{blogpost.title}}</p>
+        <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
+        <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>
+        <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+        <div class="comment-container">
+            {{#each comment as |comment| }}
+            <p class="comment-content small-font">{{comment.comment_content}}</p>
+            <p class="comment-author small-font">Comment by: {{comment.user.name}}</p>
+            <p class="comment-date small-font">{{format_date comment.createdAt}}</p>
+            {{/each}}
+        </div>
+    </div>
+</section>

@@ -17,7 +17,11 @@ Blogpost.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        content: {
+        emoji: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        blog_content: {
             type: DataTypes.STRING,
             allowNull: false,
         },

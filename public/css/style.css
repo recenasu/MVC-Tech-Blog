@@ -4,7 +4,7 @@
   --tertiary: #2c3b7d;
   --quatrinary: #2b3467;
   --light: #e3e4e3;
-  --dark: #182c23;
+  --dark: #4c5d55;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
 }
@@ -55,7 +55,7 @@ aside {
 
 nav {
   display: flex;
-  background-color: var(--secondary);
+  background-color: var(--dark);
 }
 
 nav a {
@@ -66,7 +66,6 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--secondary);
   background-color: var(--dark);
 }
 
@@ -79,10 +78,13 @@ padding: 10px;
 }
 
 .blogpost-button {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
   width: 100%;
   padding: 10px;
-  background-color: blue;
+  background-color: var(--quatrinary);
   color: azure;
   border: none;
   margin: 0 0 10px 0;
@@ -93,9 +95,70 @@ padding: 10px;
   transition: background-color 0.3s ease;
 }
 
+.blogpost-button p:nth-child(1) {
+  flex-basis: 10%;
+  text-align: center;
+}
+
+.blogpost-button p:nth-child(2) {
+  flex-basis: 70%;
+}
+
+.blogpost-button p:nth-child(3) {
+  flex-basis: 20%;
+}
+
  .blogpost-button:hover {
   color: var(--secondary);
   background-color: var(--light);
+}
+
+.blogpost-display {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--dark);
+  color: azure;
+  border: none;
+  margin: 0 0 10px 0;
+  text-align: left;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.blogpost-content {
+  padding: 10px 10px 20px 10px;
+}
+
+
+.comment-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  background-color: azure;
+  color: var(--quatrinary);
+  border: 2px solid black;
+  width: 100%;
+  padding: 10px;
+  }
+
+.comment-content {
+  padding: 10px;
+  border-top: 2px dashed black;
+  color: black;
+}
+
+.comment-author {
+  padding: 0 20px;
+  font-style: italic;
+  text-align: right;
+}
+
+.comment-date {
+  padding: 0 20px 10px 20px;
+  font-style: italic;
+  text-align: right;
 }
 
 .small-font {
@@ -106,6 +169,7 @@ padding: 10px;
 .large-font {
   font-size: 18px;
   margin-bottom: 5px;
+  white-space: pre;
 }
 
 

@@ -3,8 +3,9 @@
     {{#each blogposts as |blogpost| }}
     <a href="/blogpost/{{blogpost.id}}">
         <button class="blogpost-button">
-            <p class="large-font">{{blogpost.title}}</p>
-            <p class="small-font">{{blogpost.createdAt}}</p>
+            <p class="large-font"><span>{{{blogpost.emoji}}}</span></p>
+            <p class="large-font" flex-basis="60%">{{blogpost.title}}</p>
+            <p class="large-font" flex-basis="20%">{{format_date blogpost.createdAt}}</p>
         </button>
     </a>
     {{/each}}
