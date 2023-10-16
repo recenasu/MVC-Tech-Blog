@@ -1,7 +1,7 @@
 {{!-- Loop over each object in the blogposts array --}}
 <section id="blogpost-container">
     {{#each blogposts as |blogpost| }}
-    <a href="/blogpost/{{blogpost.id}}">
+    <a href="/api/{{blogpost.id}}">
         <button class="blogpost-button">
             <p class="large-font"><span>{{{blogpost.emoji}}}</span></p>
             <p class="large-font" flex-basis="60%">{{blogpost.title}}</p>

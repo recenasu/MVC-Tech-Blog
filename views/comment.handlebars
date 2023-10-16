@@ -1,0 +1,17 @@
+{{!-- User interaction to add a comment to an individual blogpost --}}
+<section id="blogpost-container">
+    <div class="blogpost-display">
+        <p class="large-font"><span>{{{blogpost.emoji}}}</span> {{blogpost.title}}</p>
+        <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
+        <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>
+        <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+    <textarea class="comment-entry" placeholder="Enter a comment"></textarea>
+    <div class="save-button-row-container" data-blogpost-id={{blogpost.id}}>
+        <button class="add-comment-button">Save Comment</button>
+        <a href="/api/{{blogpost.id}}"><button id="save-comment-button"
+                class="add-comment-button">Cancel</button></a>
+    </div>
+    </div>
+</section>
+
+<script src="/js/comment.js"></script>

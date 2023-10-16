@@ -5,7 +5,7 @@
         <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
         <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>
         <div class="add-button-row-container">
-            <button class="add-comment-button">Add Comment</button>
+            <a href="/api/comment/{{blogpost.id}}"><button class="add-comment-button">Add Comment</button></a>
             <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
         </div>
         <div class="comment-container">
