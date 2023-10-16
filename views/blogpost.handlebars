@@ -1,10 +1,13 @@
 {{!-- User interaction with an individual blogpost --}}
 <section id="blogpost-container">
     <div class="blogpost-display">
-        <p class="large-font"><span>{{{blogpost.emoji}}}</span>   {{blogpost.title}}</p>
+        <p class="large-font"><span>{{{blogpost.emoji}}}</span> {{blogpost.title}}</p>
         <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
         <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>
-        <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+        <div class="add-button-row-container">
+            <button class="add-comment-button">Add Comment</button>
+            <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+        </div>
         <div class="comment-container">
             {{#each comment as |comment| }}
             <p class="comment-content small-font">{{comment.comment_content}}</p>
