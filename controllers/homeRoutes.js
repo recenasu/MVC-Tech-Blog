@@ -17,12 +17,20 @@ router.get('/', async (req, res) => {
         // render the result with the homepage template
         res.render('homepage', {
             blogposts,
-            // logged_in: req.session ? req.session.logged_in : false
+            logged_in: req.session ? req.session.logged_in : false
         });
     } catch (err) {
         res.status(500).json(err);
     }
     }
 );
+
+// ***Render the login page***
+// This route is used when the user clicks on login on the nav bar or if the user clicks on any homepage link while logged out.
+router.get('/login', (req, res) => {
+      
+    res.render('login');
+  });
+
 
 module.exports = router;

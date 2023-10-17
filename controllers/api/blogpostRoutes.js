@@ -5,6 +5,7 @@ const withAuth = require('../../utils/auth');
 // ***GET single Blogpost data***
 // This route is used to return information on the blogpost selected by the user on the homepage or dashboard.
 router.get('/:id', async (req, res) => {
+    console.info("made it here");
     try {
         // Get blogpost data
         const blogpostData = await Blogpost.findByPk(req.params.id, {
@@ -42,7 +43,7 @@ router.get('/:id', async (req, res) => {
         // render the result with the blogpost template
         res.render('blogpost', {
             blogpost, comment,
-            // logged_in: req.session ? req.session.logged_in : false
+            logged_in: req.session ? req.session.logged_in : false
         });
     } catch (err) {
         console.error(err);
@@ -74,7 +75,7 @@ router.get('/comment/:id', async (req, res) => {
         // render the result with the comment template
         res.render('comment', {
             blogpost,
-            // logged_in: req.session ? req.session.logged_in : false
+            logged_in: req.session ? req.session.logged_in : false
         });
     } catch (err) {
         console.error(err);
@@ -88,13 +89,12 @@ router.get('/comment/:id', async (req, res) => {
 router.post('/savecomment', async (req, res) => {
     console.log("made it here!");
     try {
-        // const { user_id } = req.session;
+        const { user_id } = req.session;
         const blog_id = req.body.blog_id;
         const comment_content = req.body.comment;
 
         const payload = {
-            // **TODO - change user id to just "user_id"
-            user_id: 1,
+            user_id,
             comment_content,
             blog_id
         };

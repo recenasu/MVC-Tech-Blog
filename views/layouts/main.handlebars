@@ -12,13 +12,15 @@
         <h1>The BEST MVC Tech Blog</h1>
     <nav>
         <a href="/">Home</a>
-        <a href="/">Dashboard</a>
         {{!-- conditionally render login or logout --}}
-        {{!-- {{#if loggedIn}}
-        <button id="logout" class="btn-no-style">Logout</button>
+        {{#if logged_in}}
+        <a href="/">Dashboard</a>
+        <a href="/api/users/logout" class="login-logout" id="logout">Logout</a>
+        <script src="/js/logout.js"></script>
         {{else}}
-        <a href="/login">Login</a>
-        {{/if}} --}}
+        <a href="/login">Dashboard</a>
+        <a href="/login" class="login-logout" id="login">Login</a>
+        {{/if}}
     </nav>
     </header>
     <main>

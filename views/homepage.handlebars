@@ -1,5 +1,6 @@
 {{!-- Loop over each object in the blogposts array --}}
 <section id="blogpost-container">
+    {{#if logged_in}}
     {{#each blogposts as |blogpost| }}
     <a href="/api/{{blogpost.id}}">
         <button class="blogpost-button">
@@ -9,4 +10,15 @@
         </button>
     </a>
     {{/each}}
+    {{else}}
+    {{#each blogposts as |blogpost| }}
+    <a href="/login">
+        <button class="blogpost-button">
+            <p class="large-font"><span>{{{blogpost.emoji}}}</span></p>
+            <p class="large-font" flex-basis="60%">{{blogpost.title}}</p>
+            <p class="large-font" flex-basis="20%">{{format_date blogpost.createdAt}}</p>
+        </button>
+    </a>
+    {{/each}}
+    {{/if}}
 </section>

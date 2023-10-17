@@ -34,24 +34,28 @@ const PORT = process.env.PORT || 3001;
 // Create a new instance of the Handlebars.js engine with helpers functions
 const hbs = exphbs.create({ helpers });
 
-// // Create configuration object for the 'session' middleware
-// const sess = {
-//     secret: process.env.SESS_SECRET,
-//     cookie: {
-//         maxAge: 300000,
-//         httpOnly: true,
-//         secure: false,
-//         sameSite: 'strict',
-//     },
-//     resave: false,
-//     saveUnitialized: true,
-//     store: new SequelizeStore({
-//         db: sequelize
-//     })
-// };
+// Create configuration object for the 'session' middleware
+const sess = {
+    secret: 'Super secret secret',
+    cookie: {
+      maxAge: 1200000 // sets cookie expiration to 20 minutes
+    },
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+      db: sequelize,
+    }),
+  };
 
-// // Make the 'session' object available for use, configured with 'sess' parameters
-// app.use(session(sess));
+// Make the 'session' object available for use, configured with 'sess' parameters
+app.use(session(sess));
+
+// Middleware to set 'logged_in' default value
+app.use((req, res, next) => {
+    if (!req.session) req.session = {};
+    req.session.logged_in = req.session.logged_in || false;
+    next();
+  });
 
 // Register the template engine for Express.js. Associate the file extension 'handlebars' with the Handlebars template engine (hbs.engine)
 app.engine('handlebars', hbs.engine);
@@ -70,6 +74,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount the 'routes' object for use by Express.js.
 app.use(routes);
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
 // Sync the models to the database without dropping existing tables, then start the server to listen on the PORT.
 sequelize.sync({ force: false }).then(() => {
