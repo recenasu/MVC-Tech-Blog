@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { Blogpost, Comment, User } = require('../../models');
 const { findByPk } = require('../../models/Blogpost');
 const withAuth = require('../../utils/auth');
@@ -246,6 +247,26 @@ router.delete('/post/delete/:id', withAuth, async (req, res) => {
         console.log(blogpost);
 
         res.status(200).json({ redirect: '/dashboard' });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
+});
+
+// ***DELETE COMMENT route that deletes the specified comment***
+// This route is executed when the user clicks on the Delete Comment button from the Blogpost page. It returns the updated Blogpost template. The Delete Comment buttons are only available to the Blogpost author.
+router.delete('/comment/delete/:id', withAuth, async (req, res) => {
+    try {
+        const comment = await Comment.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+        console.log(comment);
+
+        // res.status(200).json({ redirect: `/api/${req.params.id}` });
+        res.status(200).json(response);
+
     } catch (err) {
         res.status(500).json(err);
     }

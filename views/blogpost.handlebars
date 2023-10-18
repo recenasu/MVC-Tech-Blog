@@ -23,7 +23,7 @@
             <p class="comment-content small-font">{{individual_comment.comment_content}}</p>
             <p class="comment-author small-font">Comment by: {{individual_comment.user.name}}</p>
             <p class="comment-date small-font">{{format_date individual_comment.createdAt}}</p>
-            <button class="delete-comment-button" data-blogpost-id={{blogpost.id}}>Delete Comment</button>
+            <button class="delete-comment-button" data-comment-id={{individual_comment.id}} data-blog-id={{individual_comment.blog_id}}>Delete Comment</button>
             {{/each}}
             {{else}}
             {{#each comment as |individual_comment| }}
@@ -35,3 +35,5 @@
         </div>
     </div>
 </section>
+
+<script src="/js/deleteComment.js"></script>
