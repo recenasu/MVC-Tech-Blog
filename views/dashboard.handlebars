@@ -2,7 +2,7 @@
 <section id="blogpost-container">
     <div class="new-post-button-row-container">
     <p class="large-font">Posted by {{session.user_name}}</p>
-            <a href="/api/newpost"><button class="add-comment-button">New Post </button></a>
+            <a href="/api/newpost/form"><button class="add-comment-button">New Post </button></a>
         </div>
     {{#each blogposts as |blogpost| }}
     <a href="/api/{{blogpost.id}}">
