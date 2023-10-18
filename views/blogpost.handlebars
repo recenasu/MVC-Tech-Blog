@@ -18,11 +18,20 @@
         </div>
         {{/if}}
         <div class="comment-container">
-            {{#each comment as |comment| }}
-            <p class="comment-content small-font">{{comment.comment_content}}</p>
-            <p class="comment-author small-font">Comment by: {{comment.user.name}}</p>
-            <p class="comment-date small-font">{{format_date comment.createdAt}}</p>
+            {{#if isSameUser}}
+            {{#each comment as |individual_comment| }}
+            <p class="comment-content small-font">{{individual_comment.comment_content}}</p>
+            <p class="comment-author small-font">Comment by: {{individual_comment.user.name}}</p>
+            <p class="comment-date small-font">{{format_date individual_comment.createdAt}}</p>
+            <button class="delete-comment-button" data-blogpost-id={{blogpost.id}}>Delete Comment</button>
             {{/each}}
+            {{else}}
+            {{#each comment as |individual_comment| }}
+            <p class="comment-content small-font">{{individual_comment.comment_content}}</p>
+            <p class="comment-author small-font">Comment by: {{individual_comment.user.name}}</p>
+            <p class="comment-date small-font">{{format_date individual_comment.createdAt}}</p>
+            {{/each}}
+            {{/if}}
         </div>
     </div>
 </section>

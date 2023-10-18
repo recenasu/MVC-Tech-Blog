@@ -1,6 +1,6 @@
 {{!-- User interaction to add a comment to an individual blogpost --}}
-<section id="blogpost-container">
-    <div class="blogpost-display">
+<section id="blogpost-container" data-blogpost-user-id={{blogpost.user_id}}>
+    <div class="blogpost-display" data-current-user-id={{session.user_id}}>
         <p class="large-font"><span>{{{blogpost.emoji}}}</span> {{blogpost.title}}</p>
         <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
         <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>

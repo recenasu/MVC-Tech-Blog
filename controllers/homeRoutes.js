@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Blogpost, Comment, User } = require('../models');
+const withAuth = require('../utils/auth');
 
 // ***GET all Blogpost data***
 // This route is used to return all blogposts to appear on the homepage.
@@ -24,7 +25,7 @@ router.get('/', async (req, res) => {
 
 // ***GET Dashboard data for the logged in user***
 // This route is used to return all blogposts to appear on the homepage.
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
         // Get all blogpost data
         const blogpostData = await Blogpost.findAll({

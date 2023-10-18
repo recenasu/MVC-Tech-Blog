@@ -308,6 +308,27 @@ nav #welcome {
   background-color: var(--rareBad);
 }
 
+.delete-comment-button {
+  font-size: 12px;
+  width: 120px;
+  padding: 10px;
+  background-color: var(--dark);
+  color: var(--light);
+  border: solid 1px black;
+  margin: 0 0 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 1.0s ease;
+}
+
+.delete-comment-button:hover {
+  border: solid 1px var(--secondary);
+  color: var(--secondary);
+  background-color: var(--rareBad);
+}
+
 
 .btn-no-style {
   background: none;

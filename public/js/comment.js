@@ -2,17 +2,17 @@
 
 const saveComment = async () => {
 
-    const blogpostId = document.querySelector('.save-button-row-container').getAttribute('data-blogpost-id');
+    const blog_id = document.querySelector('.save-button-row-container').getAttribute('data-blogpost-id');
 
     const payload = {
         comment: document.querySelector('.comment-entry').value,
-        blog_id: blogpostId,
+        blog_id,
     };
 
     console.log(payload);
 
     try {
-        const response = await fetch('/api/savecomment', {
+        const response = await fetch('/api/comment/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,9 +21,10 @@ const saveComment = async () => {
 
         });
 
+        console.log(response);
         if (response.ok) {
-            // refresh the history page
-            window.location.href = `/api/${payload.blog_id}`;
+            // refresh the blogpost page
+            window.location.href = `/api/${blog_id}`;
         } else {
             console.log("Redirect error.");
         }

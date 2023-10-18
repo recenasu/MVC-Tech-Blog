@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const { Blogpost, Comment, User } = require('../../models');
 const { findByPk } = require('../../models/Blogpost');
+const withAuth = require('../../utils/auth');
 
 // ***GET single Blogpost data***
 // This route is used to return information on the blogpost selected by the user on the homepage or dashboard.
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     try {
         // Get blogpost data
         const blogpostData = await Blogpost.findByPk(req.params.id, {
@@ -62,7 +63,7 @@ router.get('/:id', async (req, res) => {
 
 // ***GET single Blogpost data with comment entry template***
 // This route is used to return information on the blogpost and the comment entry form.
-router.get('/comment/:id', async (req, res) => {
+router.get('/comment/:id', withAuth, async (req, res) => {
     try {
         // Get blogpost data
         const blogpostData = await Blogpost.findByPk(req.params.id, {
@@ -94,7 +95,7 @@ router.get('/comment/:id', async (req, res) => {
 
 // ***POST the received comment associated with the received blogpost id***
 // This route is used when the user clicks on the Save Comment button after entering a comment on the blogpost comment entry page. It posts the new comment to the database, retrieves all comments from the database, and then returns the blogpost template.
-router.post('/savecomment', async (req, res) => {
+router.post('/comment/save', withAuth, async (req, res) => {
     try {
         const { user_id } = req.session;
         const blog_id = req.body.blog_id;
@@ -103,12 +104,12 @@ router.post('/savecomment', async (req, res) => {
         const payload = {
             user_id,
             comment_content,
-            blog_id
+            blog_id,
         };
 
         const newCommentData = await Comment.create(payload);
         console.log(newCommentData);
-        res.status(200).json(newCommentData);
+        res.status(200).json({ redirect: `/api/${blog_id}` });
 
     } catch (err) {
         res.status(400).json(err);
@@ -117,7 +118,7 @@ router.post('/savecomment', async (req, res) => {
 
 // ***GET route that returns the newPost page***
 // This route is executed when the user clicks on the New Post button on the Dashboard. It returns the newPost template for the user to add a new post.
-router.get('/newpost/form', async (req, res) => {
+router.get('/newpost/form', withAuth, async (req, res) => {
     try {
         console.log('made it here!');
         const randomNum = Math.random();
@@ -159,7 +160,7 @@ router.get('/newpost/form', async (req, res) => {
 
 // ***POST route for posting a new blogpost***
 // This route is executed when the user clicks on the Save Post button on the newPost page. It adds the user's post to the blogpost model tagged with the user's user_id.
-router.post('/newpost/save', async (req, res) => {
+router.post('/newpost/save', withAuth, async (req, res) => {
     try {
         const { user_id } = req.session;
         const title = req.body.title;
@@ -184,7 +185,7 @@ router.post('/newpost/save', async (req, res) => {
 
 // ***GET route that returns the Delete Post Confirmation page***
 // This route is executed when the user clicks on the Delete Post button on the Blogpost page. It returns the deletePostConfirm template for the user to confirm or cancel the delete operation.
-router.get('/post/confirm/:id', async (req, res) => {
+router.get('/post/confirm/:id', withAuth, async (req, res) => {
     try {
         // Get blogpost data
         const blogpostData = await Blogpost.findByPk(req.params.id, {
@@ -235,7 +236,7 @@ router.get('/post/confirm/:id', async (req, res) => {
 
 // ***DELETE POST route that deletes the specified blogpost***
 // This route is executed when the user clicks on the Delete Post button from the delete post confirmation page. It returns the updated dashboard template.
-router.delete('/post/delete/:id', async (req, res) => {
+router.delete('/post/delete/:id', withAuth, async (req, res) => {
     try {
         const blogpost = await Blogpost.destroy({
             where: {
