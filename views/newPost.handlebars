@@ -1,7 +1,7 @@
 {{!-- User interaction to add a new blogpost --}}
 <section id="blogpost-container">
     <div class="new-post-display">
-        <p class="large-font"><span>{{{postEmoji}}}</span>  New Post by: {{session.user_name}}</p>
+        <p class="large-font" id="post-emoji" data-post-emoji={{postEmoji}}><span>{{{postEmoji}}}</span>  New Post by: {{session.user_name}}</p>
         <textarea class="post-title-entry" placeholder="Enter a title for the new post"></textarea>
         <textarea class="comment-entry" placeholder="What's on your mind?"></textarea>
         <div class="save-button-row-container">

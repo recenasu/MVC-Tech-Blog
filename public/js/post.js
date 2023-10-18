@@ -1,19 +1,17 @@
-// Listens for button clicks on the individual blogpost page. If the Add Comment button is clicked, sends a get route to the server for the Add Comment template.
+// Listens for button clicks on the new post page. If the Save Post button is clicked, sends a post route to the server with the title, post, and emoji data.
 
-// ***TODO** turn this into a post for the Save Post button
-const saveComment = async () => {
-
-    const blogpostId = document.querySelector('.save-button-row-container').getAttribute('data-blogpost-id');
+const savePost = async () => {
 
     const payload = {
-        comment: document.querySelector('.comment-entry').value,
-        blog_id: blogpostId,
+        title: document.querySelector('.post-title-entry').value,
+        blog_content: document.querySelector('.comment-entry').value,
+        emoji: document.querySelector('#post-emoji').getAttribute('data-post-emoji'),
     };
 
     console.log(payload);
 
     try {
-        const response = await fetch('/api/savecomment', {
+        const response = await fetch('/api/newpost/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +22,7 @@ const saveComment = async () => {
 
         if (response.ok) {
             // refresh the history page
-            window.location.href = `/api/${payload.blog_id}`;
+            window.location.href = "/dashboard";
         } else {
             console.log("Redirect error.");
         }
@@ -33,4 +31,4 @@ const saveComment = async () => {
     }
 };
 
-document.querySelector('#save-comment-button').addEventListener('click', saveComment);
+document.querySelector('#save-comment-button').addEventListener('click', savePost);

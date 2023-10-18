@@ -159,6 +159,29 @@ router.get('/newpost/form', async (req, res) => {
 
 // ***POST route for posting a new blogpost***
 // This route is executed when the user clicks on the Save Post button on the newPost page. It adds the user's post to the blogpost model tagged with the user's user_id.
+router.post('/newpost/save', async (req, res) => {
+    try {
+        const { user_id } = req.session;
+        const title = req.body.title;
+        const blog_content = req.body.blog_content;
+        const emoji = req.body.emoji;
+
+        const payload = {
+            title,
+            blog_content,
+            emoji,
+            user_id,
+        };
+
+        const newPostData = await Blogpost.create(payload);
+        console.log(newPostData);
+        res.status(200).json(newPostData);
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 
 
 module.exports = router;

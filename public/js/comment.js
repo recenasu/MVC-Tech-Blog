@@ -1,4 +1,4 @@
-// Listens for button clicks on the individual blogpost page. If the Add Comment button is clicked, sends a get route to the server for the Add Comment template.
+// Listens for button clicks on the individual blogpost page. If the Save Comment button is clicked, sends a post route to the server with the comment field contents and blog_id.
 
 const saveComment = async () => {
 
