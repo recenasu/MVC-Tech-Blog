@@ -1,3 +1,4 @@
+// ***SAVE POST***
 // Listens for button clicks on the new post page. If the Save Post button is clicked, sends a post route to the server with the title, post, and emoji data.
 
 const savePost = async () => {
@@ -21,7 +22,7 @@ const savePost = async () => {
         });
 
         if (response.ok) {
-            // refresh the history page
+            // refresh the dashboard
             window.location.href = "/dashboard";
         } else {
             console.log("Redirect error.");

@@ -1,22 +1,17 @@
-{{!-- User interaction with an individual blogpost --}}
+{{!-- confirmation to delete an individual blogpost --}}
 <section id="blogpost-container">
     <div class="blogpost-display">
         <p class="large-font"><span>{{{blogpost.emoji}}}</span> {{blogpost.title}}</p>
         <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
         <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>
-        {{#if isSameUser}}
         <div class="add-button-row-container">
-            <a href="/api/comment/{{blogpost.id}}"><button class="add-comment-button">Add Comment</button></a>
-            <a href="/api/comment/{{blogpost.id}}"><button class="add-comment-button">Update Post</button></a>
-            <a href="/api/post/confirm/{{blogpost.id}}"><button class="delete-post-button">Delete Post</button></a>
+            <div class="confirmation-caption">
+                <p class="large-font">Delete this post? Are you sure?</p>
+                <button class="delete-post-button" data-blogpost-id={{blogpost.id}}>Delete Post</button>
+                <a href="/api/{{blogpost.id}}"><button class="add-comment-button">Cancel</button></a>
+            </div>
             <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
         </div>
-        {{else}}
-        <div class="add-button-row-container">
-            <a href="/api/comment/{{blogpost.id}}"><button class="add-comment-button">Add Comment</button></a>
-            <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
-        </div>
-        {{/if}}
         <div class="comment-container">
             {{#each comment as |comment| }}
             <p class="comment-content small-font">{{comment.comment_content}}</p>
@@ -26,3 +21,5 @@
         </div>
     </div>
 </section>
+
+<script src="/js/deletePost.js"></script>

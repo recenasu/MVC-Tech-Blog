@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Blogpost, Comment, User } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { findByPk } = require('../../models/Blogpost');
 
 // ***GET single Blogpost data***
 // This route is used to return information on the blogpost selected by the user on the homepage or dashboard.
@@ -182,6 +182,73 @@ router.post('/newpost/save', async (req, res) => {
     }
 });
 
+// ***GET route that returns the Delete Post Confirmation page***
+// This route is executed when the user clicks on the Delete Post button on the Blogpost page. It returns the deletePostConfirm template for the user to confirm or cancel the delete operation.
+router.get('/post/confirm/:id', async (req, res) => {
+    try {
+        // Get blogpost data
+        const blogpostData = await Blogpost.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['name', 'id'],
+                },
+            ]
+        });
 
+        // Get comment data
+        const commentData = await Comment.findAll({
+            where: {
+                blog_id: req.params.id,
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ]
+        });
+
+        console.log(blogpostData);
+        console.log(commentData);
+
+        // Assign the queried data to plain JavaScript objects that do not contain the sequelize properties. 'blogpost' is a single object. 'comment' is an array of objects.
+        const blogpost = blogpostData.get({ plain: true });
+        console.log(blogpost);
+
+        const comment = commentData.map((comment) => comment.get({ plain: true }));
+        console.log(commentData);
+        
+
+        // render the result with the blogpost template
+        res.render('deletePostConfirm', {
+            blogpost, comment, session: req.session,
+            logged_in: req.session ? req.session.logged_in : false
+
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+}
+);
+
+// ***DELETE POST route that deletes the specified blogpost***
+// This route is executed when the user clicks on the Delete Post button from the delete post confirmation page. It returns the updated dashboard template.
+router.delete('/post/delete/:id', async (req, res) => {
+    try {
+        const blogpost = await Blogpost.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+        console.log(blogpost);
+
+        res.status(200).json({ redirect: '/dashboard' });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
+});
 
 module.exports = router;
