@@ -73,6 +73,7 @@ nav a:hover {
 
 .login-logout {
   margin-left: auto;
+  margin-left: 2rem;
 }
 
 nav #logout:hover {
@@ -82,6 +83,15 @@ nav #logout:hover {
 nav #login:hover {
   color: var(--secondary);
   background-color: var(--rareGood);
+}
+
+nav #welcome {
+  display: flex;
+  margin-left:auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-style: italic;
 }
 
 #blogpost-container {
@@ -195,6 +205,17 @@ nav #login:hover {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+}
+
+.new-post-button-row-container {
+  padding: 20px 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content:space-evenly;  
+  width: 100%;
+  color: var(--light);
+  font-weight: bold;
 }
 
 .save-button-row-container {

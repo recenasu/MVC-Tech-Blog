@@ -12,7 +12,7 @@ router.get('/:id', async (req, res) => {
             include: [
                 {
                     model: User,
-                    attributes: ['name'],
+                    attributes: ['name', 'id'],
                 },
             ]
         });
@@ -39,11 +39,20 @@ router.get('/:id', async (req, res) => {
 
         const comment = commentData.map((comment) => comment.get({ plain: true }));
         console.log(commentData);
+        
+        // Check if the logged in user is the same as the post user. If so set isSameUser to true. On the template side, this variable is used to show or hide specific controls, like the "Update Post" button.
+        let isSameUser = false;
+        if (req.session.user_id == blogpost.user_id) {
+            isSameUser = true;
+        }     
+            console.log(isSameUser);
+        
 
         // render the result with the blogpost template
         res.render('blogpost', {
-            blogpost, comment,
+            blogpost, comment, isSameUser, session: req.session,
             logged_in: req.session ? req.session.logged_in : false
+
         });
     } catch (err) {
         console.error(err);
@@ -74,7 +83,7 @@ router.get('/comment/:id', async (req, res) => {
 
         // render the result with the comment template
         res.render('comment', {
-            blogpost,
+            blogpost, session: req.session,
             logged_in: req.session ? req.session.logged_in : false
         });
     } catch (err) {
@@ -107,4 +116,12 @@ router.post('/savecomment', async (req, res) => {
         res.status(400).json(err);
     }
 });
+
+// ***GET route that returns the newPost page***
+// This route is executed when the user clicks on the New Post button on the Dashboard. It returns the newPost template for the user to add a new post.
+
+// ***POST route for posting a new blogpost***
+// This route is executed when the user clicks on the Save Post button on the newPost page. It adds the user's post to the blogpost model tagged with the user's user_id.
+
+
 module.exports = router;

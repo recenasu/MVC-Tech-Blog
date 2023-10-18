@@ -1,0 +1,16 @@
+{{!-- Loop over each object in the blogposts array. The returned blogpost data is filtered on the logged in user's id --}}
+<section id="blogpost-container">
+    <div class="new-post-button-row-container">
+    <p class="large-font">Posted by {{session.user_name}}</p>
+            <a href="/api/newpost"><button class="add-comment-button">New Post </button></a>
+        </div>
+    {{#each blogposts as |blogpost| }}
+    <a href="/api/{{blogpost.id}}">
+        <button class="blogpost-button">
+            <p class="large-font"><span>{{{blogpost.emoji}}}</span></p>
+            <p class="large-font" flex-basis="60%">{{blogpost.title}}</p>
+            <p class="large-font" flex-basis="20%">{{format_date blogpost.createdAt}}</p>
+        </button>
+    </a>
+    {{/each}}
+</section>

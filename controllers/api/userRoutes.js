@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
     
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.user_name = userData.name;
       req.session.logged_in = true;
       
       console.log("Session after Signup", req.session); // Log the session object
@@ -64,6 +65,7 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.user_name = userData.name;
       req.session.logged_in = true;
       
       console.log("Session after Login", req.session); // Log the session object

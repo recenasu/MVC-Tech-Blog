@@ -14,11 +14,13 @@
         <a href="/">Home</a>
         {{!-- conditionally render login or logout --}}
         {{#if logged_in}}
-        <a href="/">Dashboard</a>
+        <a href="/dashboard">Dashboard</a>
+        <div id="welcome">Welcome back, {{session.user_name}}!</div>
         <a href="/api/users/logout" class="login-logout" id="logout">Logout</a>
         <script src="/js/logout.js"></script>
         {{else}}
         <a href="/login">Dashboard</a>
+        <div id="welcome"></div>
         <a href="/login" class="login-logout" id="login">Login</a>
         {{/if}}
     </nav>
