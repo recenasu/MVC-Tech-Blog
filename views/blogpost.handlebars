@@ -7,9 +7,9 @@
         {{#if isSameUser}}
         <div class="add-button-row-container">
             <a href="/api/comment/{{blogpost.id}}"><button class="add-comment-button">Add Comment</button></a>
-            <a href="/api/comment/{{blogpost.id}}"><button class="add-comment-button">Update Post</button></a>
+            <a href="/api/post/update/{{blogpost.id}}"><button class="add-comment-button">Update Post</button></a>
             <a href="/api/post/confirm/{{blogpost.id}}"><button class="delete-post-button">Delete Post</button></a>
-            <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+            <p class="small-font comment-date">Last updated: {{format_date blogpost.updatedAt}}</p>
         </div>
         {{else}}
         <div class="add-button-row-container">

@@ -10,7 +10,7 @@
                 <button class="delete-post-button" data-blogpost-id={{blogpost.id}}>Delete Post</button>
                 <a href="/api/{{blogpost.id}}"><button class="add-comment-button">Cancel</button></a>
             </div>
-            <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+            <p class="small-font comment-date">Last updated: {{format_date blogpost.updatedAt}}</p>
         </div>
         <div class="comment-container">
             {{#each comment as |comment| }}

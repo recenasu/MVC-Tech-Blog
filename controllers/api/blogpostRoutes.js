@@ -273,4 +273,64 @@ router.delete('/comment/delete/:id', withAuth, async (req, res) => {
 
 });
 
+// ***GET Blogpost Update Page***
+// This route is used to return the update page for the blogpost of the blogpost page on which the user clicked the Update Post button.
+router.get('/post/update/:id', withAuth, async (req, res) => {
+    try {
+        // Get blogpost data
+        const blogpostData = await Blogpost.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['name', 'id'],
+                },
+            ]
+        });
+
+        console.log(blogpostData);
+        
+        // Assign the queried data to plain JavaScript objects that do not contain the sequelize properties. 'blogpost' is a single object. 
+        const blogpost = blogpostData.get({ plain: true });
+        console.log(blogpost);
+        
+        // render the result with the blogpost template
+        res.render('updatePost', {
+            blogpost, session: req.session,
+            logged_in: req.session ? req.session.logged_in : false
+
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+}
+);
+
+//  ***PUT Blogpost Update***
+// This route is used to update a blogpost model with entries made in the updatePost template. This updates the database and returns to the updated blogpost page.
+router.put('/post/update/save/:id', withAuth, async (req, res) => {
+    try {
+        const title = req.body.title;
+        const blog_content = req.body.blog_content;
+        const blog_id = req.params.id;
+
+    const payload = {
+        title,
+        blog_content,
+    }
+
+    const updatePostData = await Blogpost.update(payload, {
+        where: {
+            id: blog_id,
+        }
+    });
+    
+    console.log(updatePostData);
+    res.status(200).json(updatePostData);
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 module.exports = router;

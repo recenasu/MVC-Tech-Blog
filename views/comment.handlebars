@@ -4,7 +4,7 @@
         <p class="large-font"><span>{{{blogpost.emoji}}}</span> {{blogpost.title}}</p>
         <p class="small-font blogpost-content">{{blogpost.blog_content}}</p>
         <p class="small-font comment-author">Posted by: {{blogpost.user.name}}</p>
-        <p class="small-font comment-date">{{format_date blogpost.createdAt}}</p>
+        <p class="small-font comment-date">Last updated: {{format_date blogpost.updatedAt}}</p>
         <textarea class="comment-entry" placeholder="Enter a comment"></textarea>
         <div class="save-button-row-container" data-blogpost-id={{blogpost.id}}>
             <button id="save-comment-button" class="add-comment-button">Save Comment</button>
